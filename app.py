@@ -15,5 +15,9 @@ def list():
 def create():
     return render_template("create.html")
 
+@app.route("/activities")
+def activities():
+    return render_template("activities.html")
+
 if __name__ == "__main__":
     app.run(debug=True)
