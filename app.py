@@ -3,6 +3,13 @@ from flask import render_template
 
 app = Flask(__name__)
 
+def helper_include_js(url, basepath='/static/js/', *k, **kv):
+    return "<script src='{basepath}{url}' type='text/javascript'></script>".format(url=url, basepath=basepath)
+
+@app.context_processor
+def helpers_personalizados():
+    return {'include_js': helper_include_js}
+
 @app.route("/")
 def index():
     return render_template("index.html")
