@@ -8,16 +8,33 @@ var interval = setInterval(function() {
     var id = '{{ id }}';
     $.get('/obtener_estado/' + id, function(data) {
 
-        if (data === 'SUCCESS') {
-            $("#message")
-                .removeClass('alert-work')
-                .addClass('alert-success')
-                .html("<i class='icon-ok-sign'></i> Done, thanks")
+        switch (data){
+            case 'SUCCESS':
+                $("#message")
+                    .removeClass('alert-work')
+                    .addClass('alert-success')
+                    .html("<i class='icon-ok'></i> Done, thanks")
 
-            clearInterval(interval)
-        } else {
-            $("span#status").html("(" + data + ")")
+                clearInterval(interval)
+                break;
+
+            case 'PENDING':
+                $("span#status").html("(" + data + ")")
+                break;
+
+            case 'FAILURE':
+                $("#message")
+                    .removeClass('alert-work')
+                    .addClass('alert-error')
+                    .html("<i class='icon-remove'></i> Sorry, error.")
+                clearInterval(interval)
+                break;
+
+            default:
+                alert(data);
+                break;
         }
+
     });
 }, 1000);
 
