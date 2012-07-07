@@ -1,11 +1,32 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<p>
-<a href='{{url_for('list')}}' class='btn btn-success'>Terminar</a>
 
-<pre>
-{{ result }}
-</pre>
+
+<script>
+var interval = setInterval(function() {
+    var id = '{{ id }}';
+    $.get('/obtener_estado/' + id, function(data) {
+
+        if (data === 'SUCCESS') {
+            $("#message")
+                .removeClass('alert-work')
+                .addClass('alert-success')
+                .html("<i class='icon-ok-sign'></i> Done, thanks")
+
+            clearInterval(interval)
+        } else {
+            $("span#status").html("(" + data + ")")
+        }
+    });
+}, 1000);
+
+</script>
+
+
+<div id='message' class="alert alert-work" ><img src='/static/procesando.gif'> &nbsp; Please wait <span id='status'></span> ...</div>
+
+<p>
+<a href='{{url_for('list')}}' class='btn btn-success'>Return to list</a>
 
 {% endblock %}

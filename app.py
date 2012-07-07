@@ -2,12 +2,16 @@ import os
 from flask import Flask
 from flask import render_template
 from flask import request
+from flask.ext.celery import Celery
 import commands
 import utils
 
 
 app = Flask(__name__)
+app.config.from_pyfile("config.py")
 sites_path = "./sites/"
+
+celery = Celery(app)
 
 def helper_include_js(url, basepath='/static/js/', *k, **kv):
     return "<script src='{basepath}{url}' type='text/javascript'></script>".format(url=url, basepath=basepath)
@@ -31,9 +35,13 @@ def create_site():
     return clone_site(url)
 
 def clone_site(url):
+    task = task_clone_site.delay(url)
+    return render_template("create_site.html", id=task.task_id)
+
+@celery.task(name="app.clone_site")
+def task_clone_site(url):
     name = os.path.basename(url)
-    result = commands.clonar_repositorio(url, sites_path + name)
-    return render_template("create_site.html", result=result)
+    return commands.clonar_repositorio(url, sites_path + name)
 
 @app.route("/activities")
 def activities():
@@ -43,6 +51,11 @@ def activities():
 def update(site):
     url = utils.get_url_from_repository(os.path.join(sites_path, site))
     return clone_site(url)
+
+@app.route("/obtener_estado/<id_tarea>")
+def obtener_estado(id_tarea):
+    t = task_clone_site.AsyncResult(id_tarea)
+    return t.status
 
 if __name__ == "__main__":
     app.run(debug=True)
