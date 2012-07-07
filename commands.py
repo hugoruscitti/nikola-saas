@@ -13,7 +13,5 @@ def clonar_repositorio(url, directorio):
 
     return p.communicate()[0]
 
-
-
 if __name__ == "__main__":
     print clonar_repositorio("https://github.com/kennethreitz/envoy.git", "/tmp/site")
