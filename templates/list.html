@@ -1,7 +1,17 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<h1>List</h1>
+<legend>List</legend>
 
-<p>Some text...
+
+{% if not sites %}
+    <div class="alert alert-error">There is not sites</div>
+{% endif %}
+
+<ul>
+{% for site in sites %}
+    <li>{{ site }}</li>
+{% endfor %}
+</ul>
+
 {% endblock %}
