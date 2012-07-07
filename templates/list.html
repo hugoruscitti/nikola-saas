@@ -6,12 +6,29 @@
 
 {% if not sites %}
     <div class="alert alert-error">There is not sites</div>
+{% else %}
+<div class='span5'>
+    <table class='table'>
+        <thead>
+            <tr>
+                <th>Site name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for site in sites %}
+            <tr>
+                <td>{{ site }}</td>
+                <td><a href="/update/{{site}}" class='btn btn-small btn-success'><i class='icon-refresh icon-white'></i> Update</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+</div>
+
 {% endif %}
 
-<ul>
-{% for site in sites %}
-    <li>{{ site }}</li>
-{% endfor %}
-</ul>
 
 {% endblock %}
