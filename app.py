@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import render_template
+from flask import request
 
 app = Flask(__name__)
 
@@ -21,6 +22,10 @@ def list():
 @app.route("/create")
 def create():
     return render_template("create.html")
+
+@app.route("/create_site", methods=['POST'])
+def create_site():
+    return request.form['url']
 
 @app.route("/activities")
 def activities():

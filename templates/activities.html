@@ -1,8 +1,20 @@
 {% extends "layout.html" %}
-{{ include_js("http://localhost:8080/application.js") | safe }}
 
 {% block body %}
 <h1>Activities</h1>
 
-<p>Some text...
+
+
+{{ include_js("http://localhost:8080/application.js", basepath='') | safe }}
+
+<script>
+function create_item(message) {
+    $("h1").after("<div class='alert alert-info'>" + message + "</div>")
+}
+
+
+window.j = new Juggernaut()
+
+</script>
+
 {% endblock %}

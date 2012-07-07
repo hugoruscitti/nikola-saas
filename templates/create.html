@@ -1,8 +1,23 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<h1>Create</h1>
 
-<p>Some text...
+
+<form class="form-horizontal" action='/create_site' method='post'>
+    <fieldset>
+        <legend>Create a new site</legend>
+        <div class="control-group">
+            <label class="control-label" for="input01">URL</label>
+            <div class="controls">
+                <input type="text" class="input-xlarge" value='https://github.com/ralsina/nikola.git' id="url" name=url>
+                <p class="help-block">Por ejemplo: <em>https://github.com/ralsina/nikola.git</em></p>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button class="btn btn-primary" type="submit">Create site</button>
+        </div>
+    </fieldset>
+</form>
 {% endblock %}
 
