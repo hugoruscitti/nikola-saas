@@ -6,7 +6,6 @@ from flask.ext.celery import Celery
 import commands
 import utils
 
-
 app = Flask(__name__)
 app.config.from_pyfile("config.py")
 sites_path = "./sites/"

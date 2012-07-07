@@ -7,6 +7,16 @@ en la nube.
 
 Se ha comenzado esta prueba en pycamp 2012 (Veronica).
 
+Historial de cambios mas importantes
+------------------------------------
+
+1. Agregando bootstrap: 08930c03f959c1fb6f132c261e36b5be759ef8cf
+2. Templates y acciones usando bootstrap: d5918a909256b00ef440baad708b6992a33fe330
+3. Creando formulario para crear sitios: 24a9b6dc392d243d849e73403868325fb9f0d14e
+4. Accion crear sitio / bloqueante (comando git): f84128e4d7490660e82f089aa7b9e519accc4015
+5. Crear y actualizar sitio, pero ahora con celery: 033e4a8555b1110438098cd7a597fa1dfd7ea271
+
+
 instalación
 -----------
 
@@ -72,3 +82,5 @@ Para instalarlo:
 Luego, para iniciarlo:
 
     juggernaut
+
+TODO...
